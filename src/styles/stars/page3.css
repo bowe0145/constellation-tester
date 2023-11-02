@@ -1,0 +1,19 @@
+[data-page="3"] .slot:nth-child(1) {
+  left: 20%;
+  bottom: 30%;
+}
+
+[data-page="3"] .slot:nth-child(2) {
+  left: 20%;
+  top: 30%;
+}
+
+[data-page="3"] .slot:nth-child(3) {
+  right: 25%;
+  bottom: 35%;
+}
+
+[data-page="3"] .slot:nth-child(4) {
+  right: 20%;
+  top: 10%;
+}

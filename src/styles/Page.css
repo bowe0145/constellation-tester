@@ -1,0 +1,87 @@
+:root {
+  --dark: hsl(235, 46%, 65%);
+  --fire: hsl(16, 100%, 40%);
+  --water: hsl(210, 100%, 50%);
+  --wind: hsl(119, 42%, 51%);
+  --earth: hsl(55, 98%, 60%);
+  --light: hsl(356, 75%, 80%);
+
+  --text-dark: hsl(0, 0%, 5%);
+  --text-light: hsl(0, 0%, 97%);
+
+  --epic: hsl(280, 100%, 50%);
+  --legendary: hsl(50, 100%, 50%);
+  --mythic: hsl(0, 100%, 50%);
+}
+
+.star-page .star-container {
+  margin: 1rem auto;
+  width: 500px;
+  height: 500px;
+  /* background-color: #ffffff; Color for the main circle */
+  background: linear-gradient(
+    to bottom right,
+    hsl(215, 18%, 28%),
+    hsl(214, 18%, 15%)
+  );
+  border-radius: 50%;
+  position: relative;
+}
+
+.slot {
+  width: 50px;
+  height: 50px;
+  padding: 1rem;
+  border-radius: 50%;
+  position: absolute;
+  border: 2px solid var(--border-color);
+  background-color: var(--color);
+
+  /* Center txt */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+}
+
+.epic {
+  --border-color: var(--epic);
+}
+
+.legendary {
+  --border-color: var(--legendary);
+}
+
+.mythic {
+  --border-color: var(--mythic);
+}
+
+.dark {
+  --color: var(--dark);
+  --text: var(--text-light);
+}
+
+.fire {
+  --color: var(--fire);
+  --text: var(--text-light);
+}
+
+.water {
+  --color: var(--water);
+  --text: var(--text-light);
+}
+
+.wind {
+  --color: var(--wind);
+  --text: var(--text-light);
+}
+
+.earth {
+  --color: var(--earth);
+  --text: var(--text-dark);
+}
+
+.light {
+  --color: var(--light);
+  --text: var(--text-dark);
+}

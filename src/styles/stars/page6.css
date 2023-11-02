@@ -1,0 +1,32 @@
+.star-container[data-page="6"] .slot:nth-child(1) {
+  left: 10%;
+  top: 15%;
+}
+
+.star-container[data-page="6"] .slot:nth-child(2) {
+  left: 45%;
+  bottom: 15%;
+  transform: translateX(-50%);
+}
+
+.star-container[data-page="6"] .slot:nth-child(3) {
+  left: 30%;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+.star-container[data-page="6"] .slot:nth-child(4) {
+  left: 40%;
+  top: 0%;
+}
+
+.star-container[data-page="6"] .slot:nth-child(5) {
+  right: 15%;
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+.star-container[data-page="6"] .slot:nth-child(6) {
+  right: 10%;
+  top: 15%;
+}

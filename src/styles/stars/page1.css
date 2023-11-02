@@ -1,0 +1,15 @@
+[data-page="1"] .slot:nth-child(1) {
+  left: 5%;
+  top: 45%; /* Slightly above the middle */
+}
+
+[data-page="1"] .slot:nth-child(2) {
+  right: 5%;
+  top: 45%; /* Opposite of the first one */
+}
+
+[data-page="1"] .slot:nth-child(3) {
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%); /* Center it */
+}

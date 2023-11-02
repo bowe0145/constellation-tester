@@ -1,0 +1,111 @@
+---
+import { $activeTab } from "../stores/navigationStore.js";
+import TabButton from "./TabButton.astro";
+// @ts-ignore
+import StarPage from "./svelte/StarPage.svelte";
+---
+
+<!-- Tabs -->
+<div
+  class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+>
+  <div class="grid h-full max-w-lg grid-cols-7 mx-auto font-medium tabs">
+    <TabButton id="1" />
+    <TabButton id="2" />
+    <TabButton id="3" />
+    <TabButton id="4" />
+    <TabButton id="5" />
+    <TabButton id="6" />
+    <TabButton id="7" />
+  </div>
+</div>
+<div class="tab-content">
+  <div class="tab-pane pane-1">
+    <StarPage num={1} slots={3} client:load />
+  </div>
+  <div class="tab-pane pane-2">
+    <StarPage num={2} slots={4} client:load />
+  </div>
+  <div class="tab-pane pane-3">
+    <StarPage num={3} slots={4} client:load />
+  </div>
+  <div class="tab-pane pane-4">
+    <StarPage num={4} slots={5} client:load />
+  </div>
+  <div class="tab-pane pane-5">
+    <StarPage num={5} slots={5} client:load />
+  </div>
+  <div class="tab-pane pane-6">
+    <StarPage num={6} slots={6} client:load />
+  </div>
+  <div class="tab-pane pane-7">
+    <StarPage num={7} slots={7} client:load />
+  </div>
+</div>
+
+<script>
+  import { $activeTab } from "../stores/navigationStore.js";
+  import { sveltePage } from "@stores/svelteStores";
+
+  const tabs = document.querySelectorAll(".tab");
+
+  $activeTab.subscribe((activeTab) => {
+    // Update active state on the tabs
+    tabs.forEach((tab) => {
+      tab.classList.remove("btn-active");
+      if (tab.getAttribute("data-tab") === activeTab) {
+        tab.classList.add("btn-active");
+      }
+    });
+
+    // Hide all content panes
+    document.querySelectorAll(".tab-pane").forEach((pane) => {
+      (pane as HTMLElement).style.display = "none";
+    });
+    // Show the selected content pane
+    const selectedPane = document.querySelector(`.pane-${activeTab}`);
+    if (selectedPane) {
+      (selectedPane as HTMLElement).style.display = "block";
+    }
+  });
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const selectedTab = tab.getAttribute("data-tab");
+      $activeTab.set(selectedTab || "1");
+      sveltePage.set(selectedTab || "1");
+
+      // Update active state on the tabs
+      tabs.forEach((innerTab) => {
+        innerTab.classList.remove("active");
+      });
+      tab.classList.add("active");
+
+      // Hide all content panes
+      document.querySelectorAll(".tab-pane").forEach((pane) => {
+        (pane as HTMLElement).style.display = "none";
+      });
+      // Show the selected content pane
+      const selectedPane = document.querySelector(`.pane-${selectedTab}`);
+      if (selectedPane) {
+        (selectedPane as HTMLElement).style.display = "block";
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Styles for your tabs */
+  /* ... */
+  .tab-pane {
+    display: none;
+  }
+  /* Make the first pane visible by default */
+  .pane-1 {
+    display: block;
+  }
+
+  .tab {
+    cursor: pointer;
+  }
+</style>

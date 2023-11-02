@@ -1,0 +1,26 @@
+[data-page="4"] .slot:nth-child(1) {
+  left: 50%;
+  bottom: 25%;
+  transform: translateX(-50%); /* Center it */
+}
+
+[data-page="4"] .slot:nth-child(2) {
+  left: 0%;
+  top: 40%;
+  transform: translateY(-50%); /* Center it vertically */
+}
+
+[data-page="4"] .slot:nth-child(3) {
+  right: 10%;
+  bottom: 30%;
+}
+
+[data-page="4"] .slot:nth-child(4) {
+  right: 15%;
+  top: 10%;
+}
+
+[data-page="4"] .slot:nth-child(5) {
+  left: 30%;
+  top: 20%;
+}

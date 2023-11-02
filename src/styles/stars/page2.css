@@ -1,0 +1,23 @@
+[data-page="2"] .slot:nth-child(1) {
+  left: 50%;
+  bottom: 20%;
+  transform: translateX(-50%); /* Center it */
+}
+
+[data-page="2"] .slot:nth-child(2) {
+  left: 20%;
+  top: 40%;
+  transform: translateY(-50%); /* Center vertically */
+}
+
+[data-page="2"] .slot:nth-child(3) {
+  right: 0%;
+  top: 40%;
+  transform: translateY(-50%); /* Center vertically */
+}
+
+[data-page="2"] .slot:nth-child(4) {
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%); /* Center it */
+}

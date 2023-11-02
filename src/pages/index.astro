@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Tabs from "../components/Tabs.astro";
+import Tools from "../components/Tools.astro";
+import "../styles/stars/page1.css";
+import "../styles/stars/page2.css";
+import "../styles/stars/page3.css";
+import "../styles/stars/page4.css";
+import "../styles/stars/page5.css";
+import "../styles/stars/page6.css";
+import "../styles/stars/page7.css";
+import "../styles/Page.css";
+import Toolbox from "@/components/Toolbox.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <main
+    class="flex text-white flex-wrap flex-row w-full min-w-full gap-2 items-center justify-around text-center p-0"
+  >
+    <Tabs />
+    <Toolbox />
+  </main>
+</Layout>

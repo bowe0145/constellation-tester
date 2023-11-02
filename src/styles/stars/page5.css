@@ -1,0 +1,25 @@
+.star-container[data-page="5"] .slot:nth-child(1) {
+  left: 20%;
+  bottom: 35%;
+}
+
+.star-container[data-page="5"] .slot:nth-child(2) {
+  left: 5%;
+  top: 20%;
+}
+
+.star-container[data-page="5"] .slot:nth-child(3) {
+  right: 30%;
+  bottom: 15%;
+}
+
+.star-container[data-page="5"] .slot:nth-child(4) {
+  right: 0%;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+.star-container[data-page="5"] .slot:nth-child(5) {
+  right: 20%;
+  top: 10%;
+}
