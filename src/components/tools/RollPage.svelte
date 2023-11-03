@@ -8,11 +8,15 @@
     starRollCost,
     starRollCurrency,
     updateStar,
+    starPageRollAttempts,
+    starPageRollTotalCost,
   } from "@stores/svelteStores";
 
   function handleClick(
     event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
   ) {
+    starPageRollAttempts.update((value) => value + 1);
+    starPageRollTotalCost.update((value) => value + $starRollCost);
     // Loop through the starList and call randomize on each star
     get(unlockedStars).forEach((star) => {
       if (star.star.locked) return;
@@ -28,7 +32,7 @@
 </script>
 
 <button
-  class="roll-button btn btn-primary"
+  class="roll-button btn btn-primary max-w-lg"
   on:click={handleClick}
   disabled={!get(canRoll)}
 >

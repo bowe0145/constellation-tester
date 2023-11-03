@@ -9,6 +9,8 @@
     sveltePage,
     starRollCost,
     starRollCurrency,
+    starPageRollAttempts,
+    starPageRollTotalCost,
   } from "@/stores/svelteStores";
   import { pageSets, getQualifiedSet } from "@stores/starSetStore";
   import { ETier } from "@/core/stars";
@@ -16,12 +18,6 @@
   $: open = false;
   $: selectedSetNum = -1;
   $: selectedSet = $pageSets[selectedSetNum] || null;
-  $: attempts = 0;
-  $: attemptCost = 0;
-
-  sveltePage.subscribe((value) => {
-    attempts = 0;
-  });
 
   let isRolling = false; // To control the auto-roll process
 
@@ -43,8 +39,8 @@
           break;
         }
 
-        // TODO: Determine cost and add to total cost
-        attemptCost += $starRollCost;
+        starPageRollAttempts.update((value) => value + 1);
+        starPageRollTotalCost.update((value) => value + $starRollCost);
 
         for (let i = 0; i < $unlockedStarsOnPage.length; i++) {
           // Reroll every star if it's not locked
@@ -56,8 +52,6 @@
             );
           }
         }
-
-        attempts++;
 
         // Wait for 500ms before the next roll
         await delay(500);
@@ -72,47 +66,21 @@
   // To stop the auto-roll process from anywhere in your code, you can simply set `isRolling` to `false`.
   const stopAutoRoll = () => {
     isRolling = false;
-    attempts = 0;
-    attemptCost = 0;
-  };
-
-  const resetAttempts = () => {
-    attempts = 0;
-    attemptCost = 0;
   };
 
   // Function to handle radio change
   function handleRadioChange(event: Event) {
     const target = event.target as HTMLInputElement;
     selectedSetNum = parseInt(target.value, 10);
-  }
 
-  // Format the number to have commas
-  function formatNumber(number: number) {
-    return new Intl.NumberFormat("en-US", {
-      maximumFractionDigits: 0, // You can adjust this for decimal precision
-    }).format(number);
+    // Close
+    open = false;
   }
 </script>
 
 <!-- If not open, show button group (actual button, settings button) -->
 {#if !open}
   <div class="flex flex-col justify-center items-center">
-    <div class="stats shadow max-w-md w-auto">
-      <div class="stat">
-        <div class="stat-title text-md w-auto">Attempts: {attempts}</div>
-        <div class="stat-value text-xs">
-          Total Cost: {formatNumber(attemptCost)}
-          {$starRollCurrency}
-        </div>
-        <div class="stat-actions">
-          <button
-            class="btn btn-sm btn-warning"
-            on:click|preventDefault={resetAttempts}>Reset</button
-          >
-        </div>
-      </div>
-    </div>
     <div class="btn-group">
       {#if isRolling}
         <button class="btn btn-primary" on:click={stopAutoRoll}>
@@ -130,17 +98,10 @@
   </div>
 {:else}
   <dialog
-    class="w-full h-full fixed top-0 bottom-0 left-0 right-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
+    class="w-full min-h-80 h-screen overflow-y-scroll fixed top-0 bottom-0 left-0 right-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
     {open}
   >
-    <!-- Container for centered content -->
     <div class="bg-white/50 p-6 rounded shadow-lg text-center">
-      <div class="auto-roll-dialogue-header mb-4">
-        <h3 class="text-lg font-bold">Auto Roll</h3>
-        <button class="btn btn-primary mt-2" on:click={() => (open = false)}>
-          <span>Close</span>
-        </button>
-      </div>
       <!-- Loop through pageSets -->
       {#each $pageSets.filter((set) => set.tier === ETier.Mythic) as pageSet, index}
         <div class="auto-roll-dialogue-page-set mb-2">
@@ -154,6 +115,12 @@
           />
         </div>
       {/each}
+      <div class="auto-roll-dialogue-header mb-4">
+        <h3 class="text-lg font-bold">Auto Roll</h3>
+        <button class="btn btn-primary mt-2" on:click={() => (open = false)}>
+          <span>Close</span>
+        </button>
+      </div>
     </div>
   </dialog>
 {/if}

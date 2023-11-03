@@ -5,12 +5,15 @@ import RollPage from "@components/tools/RollPage.svelte";
 import AutoRoll from "@components/tools/AutoRoll.svelte";
 // @ts-ignore
 import Sets from "@components/stats/Sets.svelte";
+// @ts-ignore
+import RollCount from "@components/stats/RollCount.svelte";
 ---
 
 <div
-  class="fixed bottom-16 left-0 z-50 w-full h-48 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 overflow-y-scroll"
+  class="fixed flex flex-wrap justify-center items-center bottom-16 left-0 z-50 w-full h-48 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 overflow-y-scroll"
 >
   <RollPage client:load />
+  <RollCount client:load />
   <AutoRoll client:load />
   <Sets client:load />
 </div>
