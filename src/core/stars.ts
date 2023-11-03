@@ -1,6 +1,6 @@
 // A star contains the following properties:
 // Element - the type of star (Dark, Fire, Water, Wind, Earth, Light)
-// Tier - (Epic, Legendary, Mythic)
+// Tier - (Legendary, Mythic)
 // Possible Stats - (stat 1, stat 2)
 // Stat 1 - (Range of possible values)
 // Stat 2 - (Range of possible values)
@@ -41,6 +41,13 @@ export enum EStatName {
   // Extra
   CriticalDamage = "Critical Damage",
   MPPotency = "MP Potency",
+  PvECriticalDamageDecrease = "PvE Crit DMG Decrease",
+  PvPCriticalDamageDecrease = "PvP Crit DMG Decrease",
+  DefBoostRate = "Def Boost Rate",
+  PvPParry = "PvP Parry",
+  PvEAttack = "PvE Attack",
+  PvEDefense = "PvE Defense",
+  AoeDamageDecrease = "AoE Damage Decrease",
 }
 
 export enum ECurrency {
@@ -63,7 +70,6 @@ export enum EElement {
 
 // Enum tier
 export enum ETier {
-  Epic = "Epic",
   Legendary = "Legendary",
   Mythic = "Mythic",
 }
