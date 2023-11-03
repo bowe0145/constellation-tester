@@ -1,9 +1,9 @@
 <script lang="ts">
   import { EElementRequirement } from "@/core/stars";
   import { starsOnPage } from "@/stores/svelteStores";
-  import { getQualifiedSet, pageSets } from "@stores/starSetStore";
+  import { getBestSet, pageSets } from "@stores/starSetStore";
 
-  $: set = getQualifiedSet(
+  $: set = getBestSet(
     $starsOnPage.map((star) => star.star),
     $pageSets
   );
@@ -11,7 +11,7 @@
   starsOnPage.subscribe((value) => {
     const stars = value.map((star) => star.star);
     // console.log($pageSets);
-    const set = getQualifiedSet(stars, $pageSets);
+    const set = getBestSet(stars, $pageSets);
     // console.log("set", set);
   });
 </script>

@@ -5,6 +5,8 @@ import {
   EStatName,
   EElement,
   type IStar,
+  EStatValue,
+  EStatNameToValueMap,
 } from "@/core/stars";
 import { derived, writable } from "svelte/store";
 import { sveltePage } from "@stores/svelteStores";
@@ -694,10 +696,43 @@ const set7Star: ISetPage = [
   },
 ];
 
-export function getQualifiedSet(
-  stars: IStar[],
-  setPage: ISetPage
-): ISet | null {
+export function getQualifyingSets(stars: IStar[], setPage: ISetPage): ISet[] {
+  const qualifiedSets: ISet[] = [];
+
+  setPage.forEach((set) => {
+    let matchCount = 0;
+
+    // Check if the current set's requirements are met by the stars
+    set.requirements.forEach((req) => {
+      const count = stars.filter((star) =>
+        req.Element === "Any"
+          ? star.tier === set.tier
+          : star.element === req.Element && star.tier === set.tier
+      ).length;
+
+      // If the requirement is for 'Any' element, check only the tier
+      if (req.Element === "Any") {
+        if (count >= req.Amount) {
+          matchCount++;
+        }
+      } else {
+        // If the requirement is for a specific element, check both element and tier
+        if (count === req.Amount) {
+          matchCount++;
+        }
+      }
+    });
+
+    // If the requirements match, add the set to the qualified sets
+    if (matchCount === set.requirements.length) {
+      qualifiedSets.push(set);
+    }
+  });
+
+  return qualifiedSets;
+}
+
+export function getBestSet(stars: IStar[], setPage: ISetPage): ISet | null {
   let qualifiedSet: ISet | null = null;
 
   setPage.forEach((set) => {
@@ -740,11 +775,13 @@ export function getQualifiedSet(
 function compareSets(set1: ISet, set2: ISet): boolean {
   // Compare the effects of the sets - this might be based on value, number of effects, or however you determine one set is better than another
   const totalValue1 = set1.effects.reduce(
-    (acc, effect) => acc + (effect.value || 0),
+    (acc, effect) =>
+      acc + (effect?.value || 0) * EStatNameToValueMap[effect.name],
     0
   );
   const totalValue2 = set2.effects.reduce(
-    (acc, effect) => acc + (effect.value || 0),
+    (acc, effect) =>
+      acc + (effect?.value || 0) * EStatNameToValueMap[effect.name],
     0
   );
 

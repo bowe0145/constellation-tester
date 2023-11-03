@@ -50,6 +50,62 @@ export enum EStatName {
   AoeDamageDecrease = "AoE Damage Decrease",
 }
 
+export enum EStatValue {
+  // Dark
+  PvPAttack = 0.5,
+  PvPDefense = 0.5,
+  // Fire
+  Attack = 5,
+  CriticalHit = 1,
+  // Water
+  Parry = 1,
+  CritHitResistance = 0.5,
+  // Wind
+  Accuracy = 1,
+  Evasion = 1,
+  // Earth
+  Defense = 2,
+  Health = 2,
+  // Light
+  PvPAccuracy = 0.5,
+  PvPEvasion = 0.5,
+  // Extra
+  CriticalDamage = 0.5,
+  MPPotency = 0.5,
+  PvECriticalDamageDecrease = 0.5,
+  PvPCriticalDamageDecrease = 0.5,
+  DefBoostRate = 0.5,
+  PvPParry = 0.5,
+  PvEAttack = 0.5,
+  PvEDefense = 0.5,
+  AoeDamageDecrease = 0.5,
+}
+
+// Create a mapping from EStatName to EStatValue
+export const EStatNameToValueMap: { [key in EStatName]: EStatValue } = {
+  [EStatName.PvPAttack]: EStatValue.PvPAttack,
+  [EStatName.PvPDefense]: EStatValue.PvPDefense,
+  [EStatName.Attack]: EStatValue.Attack,
+  [EStatName.CriticalHit]: EStatValue.CriticalHit,
+  [EStatName.Parry]: EStatValue.Parry,
+  [EStatName.CritHitResistance]: EStatValue.CritHitResistance,
+  [EStatName.Accuracy]: EStatValue.Accuracy,
+  [EStatName.Evasion]: EStatValue.Evasion,
+  [EStatName.Defense]: EStatValue.Defense,
+  [EStatName.Health]: EStatValue.Health,
+  [EStatName.PvPAccuracy]: EStatValue.PvPAccuracy,
+  [EStatName.PvPEvasion]: EStatValue.PvPEvasion,
+  [EStatName.CriticalDamage]: EStatValue.CriticalDamage,
+  [EStatName.MPPotency]: EStatValue.MPPotency,
+  [EStatName.PvECriticalDamageDecrease]: EStatValue.PvECriticalDamageDecrease,
+  [EStatName.PvPCriticalDamageDecrease]: EStatValue.PvPCriticalDamageDecrease,
+  [EStatName.DefBoostRate]: EStatValue.DefBoostRate,
+  [EStatName.PvPParry]: EStatValue.PvPParry,
+  [EStatName.PvEAttack]: EStatValue.PvEAttack,
+  [EStatName.PvEDefense]: EStatValue.PvEDefense,
+  [EStatName.AoeDamageDecrease]: EStatValue.AoeDamageDecrease,
+};
+
 export enum ECurrency {
   Gold = "Gold",
   StarPieceModTicket = "Star Piece Mod Ticket",

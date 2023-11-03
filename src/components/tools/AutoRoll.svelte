@@ -12,8 +12,12 @@
     starPageRollAttempts,
     starPageRollTotalCost,
   } from "@/stores/svelteStores";
-  import { pageSets, getQualifiedSet } from "@stores/starSetStore";
-  import { ETier } from "@/core/stars";
+  import {
+    pageSets,
+    getBestSet,
+    getQualifyingSets,
+  } from "@stores/starSetStore";
+  import { EElement, ETier } from "@/core/stars";
 
   $: open = false;
   $: selectedSetNum = -1;
@@ -29,15 +33,24 @@
 
     const rerollStars = async () => {
       while (isRolling) {
-        const qualifiedSet = getQualifiedSet(
+        // const qualifiedSet = getBestSet(
+        //   $starsOnPage.map((star) => star.star),
+        //   $pageSets
+        // );
+        const qualifyingSets = getQualifyingSets(
           $starsOnPage.map((star) => star.star),
           $pageSets
         );
 
-        if (qualifiedSet === selectedSet) {
+        if (qualifyingSets.includes(selectedSet)) {
           isRolling = false;
           break;
         }
+
+        // if (qualifiedSet === selectedSet) {
+        //   isRolling = false;
+        //   break;
+        // }
 
         starPageRollAttempts.update((value) => value + 1);
         starPageRollTotalCost.update((value) => value + $starRollCost);
