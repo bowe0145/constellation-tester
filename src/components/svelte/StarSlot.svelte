@@ -22,6 +22,5 @@
   on:click={handleClick}
   class="star slot {currentStar?.star.element.toLowerCase()} {currentStar?.star.tier?.toLocaleLowerCase()}"
 >
-  <p>{currentStar?.id}</p>
   <ElementIcon element={star?.element} locked={star.locked} />
 </button>

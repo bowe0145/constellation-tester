@@ -1,5 +1,4 @@
 ---
-import { $activeTab } from "../stores/navigationStore.js";
 import TabButton from "./TabButton.astro";
 // @ts-ignore
 import StarPage from "./svelte/StarPage.svelte";
@@ -19,7 +18,7 @@ import StarPage from "./svelte/StarPage.svelte";
     <TabButton id="7" />
   </div>
 </div>
-<div class="tab-content">
+<!-- <div class="tab-content h-full">
   <div class="tab-pane pane-1">
     <StarPage num={1} slots={3} client:load />
   </div>
@@ -41,7 +40,7 @@ import StarPage from "./svelte/StarPage.svelte";
   <div class="tab-pane pane-7">
     <StarPage num={7} slots={7} client:load />
   </div>
-</div>
+</div> -->
 
 <script>
   import { $activeTab } from "../stores/navigationStore.js";

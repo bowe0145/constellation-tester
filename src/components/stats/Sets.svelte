@@ -10,14 +10,14 @@
 
   starsOnPage.subscribe((value) => {
     const stars = value.map((star) => star.star);
-    console.log($pageSets);
+    // console.log($pageSets);
     const set = getQualifiedSet(stars, $pageSets);
-    console.log("set", set);
+    // console.log("set", set);
   });
 </script>
 
-<div>
-  <p>Current Set</p>
+<div class="text-black dark:text-gray-100">
+  <p class="text-black dark:text-gray-100">Current Set</p>
   <span>{set?.name}</span>
   <!-- <span>{set?.description}</span> -->
   <p>Effects:</p>

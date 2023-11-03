@@ -5,10 +5,10 @@ const { id } = Astro.props;
 <button
   data-tab={id}
   type="button"
-  class="tab h-full inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+  class="tab h-full inline-flex flex-col items-center justify-center px-5 group"
 >
   <span
-    class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+    class="text-sm text-gray-500 dark:text-gray-400 active:text-blue-600 dark:active:text-blue-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
     >{id}</span
   >
 </button>

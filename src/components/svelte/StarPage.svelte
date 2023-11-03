@@ -7,20 +7,23 @@
     slots: number;
   }
   import Slot from "./StarSlot.svelte";
+  import { onMount } from "svelte";
 
   export let num: Props["num"];
   export let slots: Props["slots"];
 
-  for (let i = 0; i < slots; i++) {
-    const id = +(num + "" + i); // Concat page number and slot number to create unique id
+  onMount(() => {
+    for (let i = 0; i < slots; i++) {
+      const id = +(num + "" + i); // Concat page number and slot number to create unique id
 
-    const star = new Star();
+      const star = new Star();
 
-    addStar({ id, star });
-  }
+      addStar({ id, star });
+    }
+  });
 </script>
 
-<div class="star-page">
+<div class="star-page w-full h-full min-h-full min-w-full">
   <div class="star-container" data-page={num}>
     {#each $starsOnPage as star}
       <Slot id={star.id} star={star.star} />

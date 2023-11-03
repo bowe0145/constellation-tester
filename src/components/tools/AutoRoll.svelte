@@ -1,141 +1,159 @@
 <script lang="ts">
-  import { EElement } from "@/core/stars";
-  import ElementIcon from "../svelte/ElementIcon.svelte";
   import { faBars } from "@fortawesome/free-solid-svg-icons";
   import Fa from "svelte-fa";
 
   import {
-    autoRollDark,
-    autoRollFire,
-    autoRollWater,
-    autoRollWind,
-    autoRollEarth,
-    autoRollLight,
-  } from "@stores/autorollStore";
-  import { unlockedStarsOnPage } from "@/stores/svelteStores";
+    unlockedStarsOnPage,
+    updateStar,
+    starsOnPage,
+    sveltePage,
+    starRollCost,
+    starRollCurrency,
+  } from "@/stores/svelteStores";
+  import { pageSets, getQualifiedSet } from "@stores/starSetStore";
+  import { ETier } from "@/core/stars";
 
   $: open = false;
+  $: selectedSetNum = -1;
+  $: selectedSet = $pageSets[selectedSetNum] || null;
+  $: attempts = 0;
+  $: attemptCost = 0;
+
+  sveltePage.subscribe((value) => {
+    attempts = 0;
+  });
+
+  let isRolling = false; // To control the auto-roll process
 
   const handleAutoRoll = () => {
-    // For each of the unlocked stars on page, if the star is not locked, roll it
-    // Continue to roll until only the desired elements are left
+    isRolling = true; // Start rolling
 
-    // Get the stars on the page
-    const stars = $unlockedStarsOnPage;
+    const delay = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
 
-    // Get the desired elements
-    const desiredElements = [
-      $autoRollDark,
-      $autoRollFire,
-      $autoRollWater,
-      $autoRollWind,
-      $autoRollEarth,
-      $autoRollLight,
-    ];
+    const rerollStars = async () => {
+      while (isRolling) {
+        const qualifiedSet = getQualifiedSet(
+          $starsOnPage.map((star) => star.star),
+          $pageSets
+        );
 
-    // Get the elements that are not desired
-    const undesiredElements = desiredElements.filter((element) => !element);
+        if (qualifiedSet === selectedSet) {
+          isRolling = false;
+          break;
+        }
 
-    //
+        // TODO: Determine cost and add to total cost
+        attemptCost += $starRollCost;
 
-    // Loop through the stars and roll them
-    stars.forEach((star) => {
-      // If the star is locked, continue
-      if (star.star.locked) return;
+        for (let i = 0; i < $unlockedStarsOnPage.length; i++) {
+          // Reroll every star if it's not locked
+          if (!$unlockedStarsOnPage[i].star.locked) {
+            $unlockedStarsOnPage[i].star.randomize();
+            updateStar(
+              $unlockedStarsOnPage[i].id,
+              $unlockedStarsOnPage[i].star
+            );
+          }
+        }
 
-      // If the star is not locked, roll it
-      star.star.randomize();
+        attempts++;
+
+        // Wait for 500ms before the next roll
+        await delay(500);
+      }
+    };
+
+    rerollStars().then(() => {
+      isRolling = false; // Stop rolling
     });
   };
+
+  // To stop the auto-roll process from anywhere in your code, you can simply set `isRolling` to `false`.
+  const stopAutoRoll = () => {
+    isRolling = false;
+    attempts = 0;
+    attemptCost = 0;
+  };
+
+  const resetAttempts = () => {
+    attempts = 0;
+    attemptCost = 0;
+  };
+
+  // Function to handle radio change
+  function handleRadioChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    selectedSetNum = parseInt(target.value, 10);
+  }
+
+  // Format the number to have commas
+  function formatNumber(number: number) {
+    return new Intl.NumberFormat("en-US", {
+      maximumFractionDigits: 0, // You can adjust this for decimal precision
+    }).format(number);
+  }
 </script>
 
 <!-- If not open, show button group (actual button, settings button) -->
 {#if !open}
-  <div class="btn-group">
-    <button class="btn btn-primary" on:click={handleAutoRoll}>
-      <span>Auto Roll</span>
-    </button>
-    <button class="btn btn-primary" on:click={() => (open = true)}>
-      <span><Fa icon={faBars} /></span>
-    </button>
-  </div>
-{:else}
-  <!-- If open, show a dialogue to toggle on/off each EElemetn -->
-  <dialog class="w-full h-full" {open}>
-    <div class="auto-roll-dialogue-header">
-      <h3>Auto Roll</h3>
-      <button class="btn btn-primary" on:click={() => (open = false)}>
-        <span>Close</span>
+  <div class="flex flex-col justify-center items-center">
+    <div class="stats shadow max-w-md w-auto">
+      <div class="stat">
+        <div class="stat-title text-md w-auto">Attempts: {attempts}</div>
+        <div class="stat-value text-xs">
+          Total Cost: {formatNumber(attemptCost)}
+          {$starRollCurrency}
+        </div>
+        <div class="stat-actions">
+          <button
+            class="btn btn-sm btn-warning"
+            on:click|preventDefault={resetAttempts}>Reset</button
+          >
+        </div>
+      </div>
+    </div>
+    <div class="btn-group">
+      {#if isRolling}
+        <button class="btn btn-primary" on:click={stopAutoRoll}>
+          <span>Stop Auto Roll</span>
+        </button>
+      {:else}
+        <button class="btn btn-primary" on:click={handleAutoRoll}>
+          <span>Auto Roll</span>
+        </button>
+      {/if}
+      <button class="btn btn-primary" on:click={() => (open = true)}>
+        <span><Fa icon={faBars} /></span>
       </button>
     </div>
-    <!-- Center the children vertically -->
-    <div class="auto-roll-dialogue-body flex flex-row mx-auto justify-around">
-      <div class="auto-roll-dialogue-body-row">
-        <label title="dark" for="dark"
-          ><ElementIcon element={EElement.Dark} locked={false} /></label
-        >
-        <input
-          type="checkbox"
-          name="dark"
-          id="dark"
-          bind:checked={$autoRollDark}
-        />
+  </div>
+{:else}
+  <dialog
+    class="w-full h-full fixed top-0 bottom-0 left-0 right-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
+    {open}
+  >
+    <!-- Container for centered content -->
+    <div class="bg-white/50 p-6 rounded shadow-lg text-center">
+      <div class="auto-roll-dialogue-header mb-4">
+        <h3 class="text-lg font-bold">Auto Roll</h3>
+        <button class="btn btn-primary mt-2" on:click={() => (open = false)}>
+          <span>Close</span>
+        </button>
       </div>
-      <div class="auto-roll-dialogue-body-row">
-        <label title="fire" for="fire"
-          ><ElementIcon element={EElement.Fire} locked={false} /></label
-        >
-        <input
-          type="checkbox"
-          name="fire"
-          id="fire"
-          bind:checked={$autoRollFire}
-        />
-      </div>
-      <div class="auto-roll-dialogue-body-row">
-        <label title="water" for="water"
-          ><ElementIcon element={EElement.Water} locked={false} /></label
-        >
-        <input
-          type="checkbox"
-          name="water"
-          id="water"
-          bind:checked={$autoRollWater}
-        />
-      </div>
-      <div class="auto-roll-dialogue-body-row">
-        <label title="wind" for="wind"
-          ><ElementIcon element={EElement.Wind} locked={false} /></label
-        >
-        <input
-          type="checkbox"
-          name="wind"
-          id="wind"
-          bind:checked={$autoRollWind}
-        />
-      </div>
-      <div class="auto-roll-dialogue-body-row">
-        <label title="earth" for="earth"
-          ><ElementIcon element={EElement.Earth} locked={false} /></label
-        >
-        <input
-          type="checkbox"
-          name="earth"
-          id="earth"
-          bind:checked={$autoRollEarth}
-        />
-      </div>
-      <div class="auto-roll-dialogue-body-row">
-        <label title="light" for="light"
-          ><ElementIcon element={EElement.Light} locked={false} /></label
-        >
-        <input
-          type="checkbox"
-          name="light"
-          id="light"
-          bind:checked={$autoRollLight}
-        />
-      </div>
+      <!-- Loop through pageSets -->
+      {#each $pageSets.filter((set) => set.tier === ETier.Mythic) as pageSet, index}
+        <div class="auto-roll-dialogue-page-set mb-2">
+          <h4 class="font-medium text-md">{pageSet.name}</h4>
+          <input
+            type="radio"
+            class="mt-1"
+            value={index}
+            checked={selectedSetNum === index}
+            on:change={handleRadioChange}
+          />
+        </div>
+      {/each}
     </div>
   </dialog>
 {/if}

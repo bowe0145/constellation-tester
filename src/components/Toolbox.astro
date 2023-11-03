@@ -8,11 +8,9 @@ import Sets from "@components/stats/Sets.svelte";
 ---
 
 <div
-  class="fixed bottom-16 left-0 z-50 w-full h-64 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+  class="fixed bottom-16 left-0 z-50 w-full h-48 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 overflow-y-scroll"
 >
-  <p>Tools</p>
   <RollPage client:load />
   <AutoRoll client:load />
-  <p>Stats</p>
   <Sets client:load />
 </div>

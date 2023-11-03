@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Tabs from "../components/Tabs.astro";
-import Tools from "../components/Tools.astro";
+import Tabs from "@components/Tabs.astro";
 import "../styles/stars/page1.css";
 import "../styles/stars/page2.css";
 import "../styles/stars/page3.css";
@@ -11,13 +10,44 @@ import "../styles/stars/page6.css";
 import "../styles/stars/page7.css";
 import "../styles/Page.css";
 import Toolbox from "@/components/Toolbox.astro";
+// @ts-ignore
+import StarPage from "@components/svelte/StarPage.svelte";
 ---
 
 <Layout title="Welcome to Astro.">
   <main
-    class="flex text-white flex-wrap flex-row w-full min-w-full gap-2 items-center justify-around text-center p-0"
+    class="flex text-white w-full min-w-full gap-2 items-center justify-around text-center p-0 flex-col h-screen"
   >
-    <Tabs />
-    <Toolbox />
+    <div class="tab-content flex-grow h-full w-full">
+      <div class="tab-pane pane-1 h-full w-full">
+        <StarPage num={1} slots={3} client:load />
+      </div>
+      <div class="tab-pane pane-2 h-full w-full">
+        <StarPage num={2} slots={4} client:load />
+      </div>
+      <div class="tab-pane pane-3 h-full w-full">
+        <StarPage num={3} slots={4} client:load />
+      </div>
+      <div class="tab-pane pane-4 h-full w-full">
+        <StarPage num={4} slots={5} client:load />
+      </div>
+      <div class="tab-pane pane-5 h-full w-full">
+        <StarPage num={5} slots={5} client:load />
+      </div>
+      <div class="tab-pane pane-6 h-full w-full">
+        <StarPage num={6} slots={6} client:load />
+      </div>
+      <div class="tab-pane pane-7 h-full w-full">
+        <StarPage num={7} slots={7} client:load />
+      </div>
+    </div>
+    <div>
+      <div class="h-16">
+        <Tabs />
+      </div>
+      <div class="h-48">
+        <Toolbox />
+      </div>
+    </div>
   </main>
 </Layout>

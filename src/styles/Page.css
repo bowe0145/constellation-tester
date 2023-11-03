@@ -13,10 +13,18 @@
   --mythic: hsl(0, 100%, 50%);
 }
 
+.star-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .star-page .star-container {
-  margin: 1rem auto;
-  width: 500px;
-  height: 500px;
+  margin: 1rem 1rem;
+  height: calc(min(100vh - 17rem, 100vw));
+  width: calc(min(100vh - 17rem, 100vw));
   /* background-color: #ffffff; Color for the main circle */
   background: linear-gradient(
     to bottom right,
@@ -25,11 +33,13 @@
   );
   border-radius: 50%;
   position: relative;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
 }
 
 .slot {
-  width: 50px;
-  height: 50px;
+  width: min-max(50px, 10%);
+  height: min-max(50px, 10%);
   padding: 1rem;
   border-radius: 50%;
   position: absolute;
