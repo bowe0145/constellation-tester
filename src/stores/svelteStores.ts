@@ -6,6 +6,7 @@ export const sveltePage = writable("1");
 const sveltePageSlots = readable([3, 4, 4, 5, 5, 6, 7]);
 export const starPageRollAttempts = writable(0);
 export const starPageRollTotalCost = writable(0);
+export const starPageRollSpeed = writable(500);
 
 export const slotsOnPage = derived(
   [sveltePage, sveltePageSlots],

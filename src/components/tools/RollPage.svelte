@@ -31,14 +31,16 @@
   }
 </script>
 
-<button
-  class="roll-button btn btn-primary max-w-lg"
-  on:click={handleClick}
-  disabled={!get(canRoll)}
->
-  <span>
-    {$starRollCost}
-    {$starRollCurrency}
-  </span>
-  <Fa icon={faDice} />
-</button>
+<div class="flex flex-col justify-center items-center">
+  <button
+    class="roll-button btn btn-primary"
+    on:click={handleClick}
+    disabled={!get(canRoll)}
+  >
+    <span>
+      {$starRollCost}
+      {$starRollCurrency}
+    </span>
+    <Fa icon={faDice} />
+  </button>
+</div>

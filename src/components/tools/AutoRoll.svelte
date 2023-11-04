@@ -11,6 +11,7 @@
     starRollCurrency,
     starPageRollAttempts,
     starPageRollTotalCost,
+    starPageRollSpeed,
   } from "@/stores/svelteStores";
   import {
     pageSets,
@@ -67,7 +68,7 @@
         }
 
         // Wait for 500ms before the next roll
-        await delay(500);
+        await delay($starPageRollSpeed);
       }
     };
 

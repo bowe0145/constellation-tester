@@ -3118,9 +3118,9 @@ astral-regex@^2.0.0:
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
 astro-sst@^2.26.2:
-  version "2.33.4"
-  resolved "https://registry.yarnpkg.com/astro-sst/-/astro-sst-2.33.4.tgz#f84b4854d3f6590de7423825336c54276d64f477"
-  integrity sha512-S1dBysDg2ndGWkJmRT4apDcEo98lbuBpAt+ooZa/K4D6tnuxE83NikNQsctZCgzSkVUl4C6BOtzaDJOlRU5jEg==
+  version "2.34.3"
+  resolved "https://registry.yarnpkg.com/astro-sst/-/astro-sst-2.34.3.tgz#b1f8047b819d74ab1884b20d751367847d1697dc"
+  integrity sha512-vytpBipvpQZ7gM3NAg90ua3xdpV0xPU+WSqhiT3xiOk+0IIFwq5r2ZtyYKPDTydrO4j8RGHITolY3SaO4EZdAg==
   dependencies:
     "@astrojs/webapi" "^3.0.0"
     set-cookie-parser "^2.6.0"
@@ -3197,9 +3197,9 @@ async-limiter@~1.0.0:
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
 async@^3.2.4:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/async/-/async-3.2.4.tgz#2d22e00f8cddeb5fde5dd33522b56d1cf569a81c"
-  integrity sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.5.tgz#ebd52a8fdaf7a2289a24df399f8d8485c8a46b66"
+  integrity sha512-baNZyqaaLhyLVKm/DlvdW051MSgO6b8eVfIezl9E5PqWxFgzLm/wQntEW4zOytVburDEr0JlALEpdOFwvErLsg==
 
 at-least-node@^1.0.0:
   version "1.0.0"
@@ -3276,9 +3276,9 @@ aws-iot-device-sdk@^2.2.13:
     websocket-stream "^5.5.2"
 
 aws-sdk@^2.1326.0, aws-sdk@^2.1466.0:
-  version "2.1487.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1487.0.tgz#b071de08f9cf64a359b28bfc293cf8b91aae9b75"
-  integrity sha512-EqDn+beJU0pfANLdg8mh7OER5TH2W6DgZ78WWWgt9fOwczhJQYkQhqevSlCV700vtHtatRjYPG+Q47f5aurZVQ==
+  version "2.1488.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1488.0.tgz#6d7ea04970c5d6f7c65449c361de50c7e24c10a7"
+  integrity sha512-rRsOrIyqb/11T9VT65WSkTGC4yjI9z9IWKrwaZBhsqYJmqD2tj02CT9e1J6VNHqQbd+/rbKTddSKOWLjyjLXBQ==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -4064,9 +4064,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.535:
-  version "1.4.575"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.575.tgz#7c0b87eb2c6214a993699792abd704de41255c39"
-  integrity sha512-kY2BGyvgAHiX899oF6xLXSIf99bAvvdPhDoJwG77nxCSyWYuRH6e9a9a3gpXBvCs6lj4dQZJkfnW2hdKWHEISg==
+  version "1.4.576"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.576.tgz#0c6940fdc0d60f7e34bd742b29d8fa847c9294d1"
+  integrity sha512-yXsZyXJfAqzWk1WKryr0Wl0MN2D47xodPvEEwlVePBnhU5E7raevLQR+E6b9JAD3GfL/7MbAL9ZtWQQPcLx7wA==
 
 emoji-regex@^10.2.1:
   version "10.3.0"
@@ -7259,9 +7259,9 @@ sst-aws-cdk@2.101.1:
     fsevents "2.3.2"
 
 sst@^2.26.2:
-  version "2.33.4"
-  resolved "https://registry.yarnpkg.com/sst/-/sst-2.33.4.tgz#516c6d82e55e26ac3b15fe34bfc82cba34958631"
-  integrity sha512-UN3aqZlQAPRTugUWq6vcJk0t1Eokq5zUrITTXlBVKjiZz3HBqfUjwJseWnMU6hsZBG7nqdd83jpYVVeGMSw2TQ==
+  version "2.34.3"
+  resolved "https://registry.yarnpkg.com/sst/-/sst-2.34.3.tgz#a098ae750b1d0ebea6f77eb6a9337d6ed8a4e9e9"
+  integrity sha512-rLUpvNNgOr1w4PLIlQWLR/8OHVstJRavoXkBQ9kxO952hBaN7HsN0+qQOgTiTI3o/rFc0wFQP0bp/BgPxbp+SA==
   dependencies:
     "@aws-cdk/aws-apigatewayv2-alpha" "^2.101.1-alpha.0"
     "@aws-cdk/aws-apigatewayv2-authorizers-alpha" "^2.101.1-alpha.0"
@@ -7724,9 +7724,9 @@ undici-types@~5.26.4:
   integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
 undici@^5.12.0, undici@^5.22.1:
-  version "5.27.1"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-5.27.1.tgz#d4a0154aff919f9eab81567fd651d8752a5b5d17"
-  integrity sha512-h0P6HVTlbcvF6wiX88+aoouMOuiKJ2TEGfcr+tEbr96OIizJaM4BhXJs/wxdDN/RD0F2yZCV/ylCVJy9PjQJIg==
+  version "5.27.2"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-5.27.2.tgz#a270c563aea5b46cc0df2550523638c95c5d4411"
+  integrity sha512-iS857PdOEy/y3wlM3yRp+6SNQQ6xU0mmZcwRSriqk+et/cwWAtwmIGf6WkoDN2EK/AMdCO/dfXzIwi+rFMrjjQ==
   dependencies:
     "@fastify/busboy" "^2.0.0"
 

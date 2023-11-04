@@ -7,13 +7,41 @@ import AutoRoll from "@components/tools/AutoRoll.svelte";
 import Sets from "@components/stats/Sets.svelte";
 // @ts-ignore
 import RollCount from "@components/stats/RollCount.svelte";
+// @ts-ignore
+import SpeedSlider from "@components/tools/SpeedSlider.svelte";
 ---
 
 <div
-  class="fixed flex flex-wrap justify-center items-center bottom-16 left-0 z-50 w-full h-48 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 overflow-y-scroll"
+  class="fixed flex flex-wrap gap-2 justify-center items-start bottom-16 left-0 z-50 w-full h-48 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 overflow-y-scroll"
 >
-  <RollPage client:load />
-  <RollCount client:load />
-  <AutoRoll client:load />
-  <Sets client:load />
+  <div class="w-72">
+    <div class="collapse bg-base-200">
+      <input type="checkbox" name="my-accordion-1" checked="checked" />
+      <div class="collapse-title text-xl font-medium">Settings</div>
+      <div class="collapse-content">
+        <SpeedSlider client:load />
+      </div>
+    </div>
+  </div>
+
+  <div class="w-72">
+    <div class="collapse bg-base-200">
+      <input type="checkbox" name="my-accordion-1" checked="checked" />
+      <div class="collapse-title text-xl font-medium">Buttons</div>
+      <div class="collapse-content flex flex-col gap-2">
+        <RollPage client:load />
+        <AutoRoll client:load />
+      </div>
+    </div>
+  </div>
+  <div class="w-72">
+    <div class="collapse bg-base-200">
+      <input type="checkbox" name="my-accordion-1" checked="checked" />
+      <div class="collapse-title text-xl font-medium">Stats</div>
+      <div class="collapse-content gap-2">
+        <RollCount client:load />
+        <Sets client:load />
+      </div>
+    </div>
+  </div>
 </div>
